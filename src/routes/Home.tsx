@@ -3,8 +3,6 @@ import PageHeader from "../components/PageHeader";
 import { IUser } from "../interfaces/IUser";
 
 export default function Home(props: {
-  loggedIn: boolean;
-  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   user: IUser | undefined;
   setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>;
   allUsers: IUser[];
@@ -16,8 +14,6 @@ export default function Home(props: {
         allUsers={props.allUsers}
         user={props.user}
         setUser={props.setUser}
-        loggedIn={props.loggedIn}
-        setLoggedIn={props.setLoggedIn}
       />
       <div>Home Page</div>
     </>
