@@ -8,17 +8,21 @@ export default function ResourceList(props: { tags: ITag[], allResources: IResou
     const [search, setSearch] = useState("");
     const [tagsSelected, setTagsSelected] = useState<ITag[]>([]);
 
-    // let filteredResources = props.allResources;
-    // if (tagsSelected !== []) {
-    //     filteredResources = props.allResources.filter((resource) => {
-    //         for (const tag of tagsSelected) {
-    //             return resource.tags.includes(tag)
-    //         }
-    
-    //     })
-    // }
+    let filteredResources;
+    if (tagsSelected.length !== 0) {
+        filteredResources = props.allResources.filter((resource) => {
+            for (const tagSelected of tagsSelected) {
+                if (resource.tags.some(tag => tag.id===tagSelected.id)) {
+                    return true;
+                }
+            }
+            return false;
+        })
+    } else {
+        filteredResources = props.allResources;
+    }
 
-    console.log(props.allResources)
+    console.log(props.allResources, filteredResources)
 
     const handleTagClick = (tag: ITag) => {
         let newTags: ITag[] ;
@@ -31,7 +35,7 @@ export default function ResourceList(props: { tags: ITag[], allResources: IResou
         setTagsSelected(newTags);
     }
 
-    console.log(tagsSelected);
+    // console.log(tagsSelected);
     return (
         <>
         <h2>Recommendations</h2>
@@ -39,7 +43,7 @@ export default function ResourceList(props: { tags: ITag[], allResources: IResou
             <button key={tag.id} onClick={() => handleTagClick(tag)}>{tag.name}</button>
         ))}
         <input placeholder={"search for resource"}value={search} onChange={(e) => setSearch(e.target.value)}></input>
-        {/*filteredResources*/props.allResources.map((resource) => (
+        {filteredResources.map((resource) => (
             <Resource
             key={resource.id}
             id={resource.id}
