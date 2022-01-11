@@ -8,10 +8,11 @@ export interface IResource {
 
 export interface IResourceShort extends IResource {
   // for GET /resources
+  // for GET /to-study-list/{userId}
   id: number;
-  creation_date: string;
-  likes: number;
-  dislikes: number;
+  creation_date?: string;
+  likes?: number;
+  dislikes?: number;
 }
 
 export interface IResourceAdd extends IResource {
