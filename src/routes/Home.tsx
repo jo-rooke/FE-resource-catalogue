@@ -1,6 +1,7 @@
 import React from "react";
 import PageHeader from "../components/PageHeader";
 import { IUser } from "../interfaces/IUser";
+import ToStudyList from "../components/ToStudyList";
 import { ITag } from "../interfaces/ITag";
 import { IResourceShort } from "../interfaces/IResource";
 import ResourceList from "../components/ResourceList";
@@ -22,6 +23,7 @@ export default function Home(props: {
       />
       <ResourceList tags={props.tags} allResources={props.allResources} />
       <div>Home Page</div>
+      {props.user !== undefined && <ToStudyList user={props.user} />}
     </>
   );
 }
