@@ -9,7 +9,7 @@ export default function ToStudyList(props: { user: IUser }): JSX.Element {
   const [studyList, setStudyList] = useState<IResourceShort[]>([]);
   useEffect(() => {
     fetchData(baseUrl + `/to-study-list/${props.user.id}`, setStudyList);
-  }, []);
+  }, [props.user.id]);
 
   const StudyItem = (item: IResourceShort): JSX.Element => {
     return (
