@@ -21,7 +21,11 @@ export default function Home(props: {
         user={props.user}
         setUser={props.setUser}
       />
-      <ResourceList tags={props.tags} allResources={props.allResources} />
+      <ResourceList
+        tags={props.tags}
+        allResources={props.allResources}
+        user={props.user}
+      />
       <div>Home Page</div>
       {props.user !== undefined && <ToStudyList user={props.user} />}
     </>

@@ -1,4 +1,5 @@
 import { ITag } from "./ITag";
+import { IUser } from "./IUser";
 
 export interface IResource {
   resource_name: string;
@@ -14,6 +15,10 @@ export interface IResourceShort extends IResource {
   creation_date?: string;
   likes?: number;
   dislikes?: number;
+}
+
+export interface ResourceComponentProps extends IResourceShort {
+  user: IUser | undefined;
 }
 
 export interface IResourceAdd extends IResource {

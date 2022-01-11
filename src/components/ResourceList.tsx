@@ -4,10 +4,12 @@ import { useState } from "react";
 import Resource from "./Resource";
 import filterTags from "../utils/filterTags";
 import filterSearch from "../utils/filterSearch";
+import { IUser } from "../interfaces/IUser";
 
 export default function ResourceList(props: {
   tags: ITag[];
   allResources: IResourceShort[];
+  user: IUser | undefined;
 }): JSX.Element {
   const [search, setSearch] = useState("");
   const [tagsSelected, setTagsSelected] = useState<ITag[]>([]);
@@ -48,6 +50,7 @@ export default function ResourceList(props: {
   return (
     <>
       <h2>Recommendations</h2>
+
       {props.tags.map((tag) => (
         <button key={tag.id} onClick={() => handleTagClick(tag)}>
           {tag.name}
@@ -58,6 +61,7 @@ export default function ResourceList(props: {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       ></input>
+      {props.user && <button>Add a new resource</button>}
       {filteredResources.map((resource) => (
         <Resource
           key={resource.id}
@@ -69,6 +73,7 @@ export default function ResourceList(props: {
           creation_date={resource.creation_date}
           likes={resource.likes}
           dislikes={resource.dislikes}
+          user={props.user}
         />
       ))}
     </>
