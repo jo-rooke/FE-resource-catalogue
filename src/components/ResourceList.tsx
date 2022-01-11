@@ -33,8 +33,6 @@ export default function ResourceList(props: {
     );
   }
 
-  // console.log(props.allResources)
-
   const handleTagClick = (tag: ITag) => {
     let newTags: ITag[];
     if (tagsSelected.includes(tag)) {
@@ -47,8 +45,6 @@ export default function ResourceList(props: {
 
     setTagsSelected(newTags);
   };
-
-  // console.log(tagsSelected);
   return (
     <>
       <h2>Recommendations</h2>
