@@ -3,6 +3,7 @@ import { ITag } from "../interfaces/ITag";
 import { useState } from "react";
 import Resource from "./Resource";
 import filterTags from "../utils/filterTags";
+import filterSearch from "../utils/filterSearch";
 
 export default function ResourceList(props: {
   tags: ITag[];
@@ -19,39 +20,17 @@ export default function ResourceList(props: {
     );
   } else if (tagsSelected.length === 0 && search.length !== 0) {
     //filtering for search term only
-    filteredResources = props.allResources.filter((resource) => {
-      console.log(
-        resource.author_name,
-        resource.resource_name,
-        resource.description,
-        resource.tags
-      );
-      return (
-        resource.author_name.includes(search) ||
-        resource.resource_name.includes(search) ||
-        resource.description.includes(search) ||
-        resource.tags.some((tag) => tag.name.includes(search))
-      );
-    });
+    filteredResources = props.allResources.filter((resource) =>
+      filterSearch(search, resource)
+    );
   } else if (tagsSelected.length !== 0 && search.length !== 0) {
     //filtering for both tags and search term
-    const filteredTags = props.allResources.filter((resource) => {
-      for (const tagSelected of tagsSelected) {
-        if (resource.tags.some((tag) => tag.id === tagSelected.id)) {
-          return true;
-        }
-      }
-      return false;
-    });
-    filteredResources = filteredTags.filter((resource) => {
-      // console.log(resource);
-      return (
-        resource.author_name.includes(search) ||
-        resource.resource_name.includes(search) ||
-        resource.description.includes(search) ||
-        resource.tags.some((tag) => tag.name.includes(search))
-      );
-    });
+    const filteredTags = props.allResources.filter((resource) =>
+      filterTags(tagsSelected, resource)
+    );
+    filteredResources = filteredTags.filter((resource) =>
+      filterSearch(search, resource)
+    );
   }
 
   // console.log(props.allResources)

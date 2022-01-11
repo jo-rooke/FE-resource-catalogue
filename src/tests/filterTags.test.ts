@@ -1,6 +1,6 @@
 import filterTags from "../utils/filterTags";
 
-test("", () => {
+test("Callback function to be used in a filter, should return boolean whether a given resource meets the tags criteria", () => {
   const selectedTags = [
     { id: 1, name: "HTML" },
     { id: 8, name: "Express" },
