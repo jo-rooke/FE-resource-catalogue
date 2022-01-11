@@ -2,6 +2,7 @@ import { IResourceShort } from "../interfaces/IResource";
 import { ITag } from "../interfaces/ITag";
 import { useState } from "react";
 import Resource from "./Resource";
+import filterTags from "../utils/filterTags";
 
 export default function ResourceList(props: {
   tags: ITag[];
@@ -13,14 +14,9 @@ export default function ResourceList(props: {
   let filteredResources: IResourceShort[] = props.allResources;
   //filtering for tags only
   if (tagsSelected.length !== 0 && search.length === 0) {
-    filteredResources = props.allResources.filter((resource) => {
-      for (const tagSelected of tagsSelected) {
-        if (resource.tags.some((tag) => tag.id === tagSelected.id)) {
-          return true;
-        }
-      }
-      return false;
-    });
+    filteredResources = props.allResources.filter((singleResource) =>
+      filterTags(tagsSelected, singleResource)
+    );
   } else if (tagsSelected.length === 0 && search.length !== 0) {
     //filtering for search term only
     filteredResources = props.allResources.filter((resource) => {
