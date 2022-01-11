@@ -1,5 +1,6 @@
 import React from "react";
 import { IUser } from "../interfaces/IUser";
+import { getUserById } from "../utils/getUserById";
 
 export default function LogIn(props: {
   allUsers: IUser[];
@@ -15,11 +16,7 @@ export default function LogIn(props: {
           defaultValue={""}
           // placeholder="Select your name"
           onChange={(e) =>
-            props.setUser(
-              props.allUsers.filter(
-                (user) => user.id === parseInt(e.target.value)
-              )[0]
-            )
+            props.setUser(getUserById(props.allUsers, parseInt(e.target.value)))
           }
         >
           <option value="" disabled>
