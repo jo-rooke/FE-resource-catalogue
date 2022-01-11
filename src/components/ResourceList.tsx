@@ -8,8 +8,10 @@ export default function ResourceList(props: { tags: ITag[], allResources: IResou
     const [search, setSearch] = useState("");
     const [tagsSelected, setTagsSelected] = useState<ITag[]>([]);
 
-    let filteredResources;
-    if (tagsSelected.length !== 0) {
+    let filteredResources: IResourceShort[] = props.allResources;
+    //filtering for tags only
+    if (tagsSelected.length !== 0 && search.length === 0) {
+
         filteredResources = props.allResources.filter((resource) => {
             for (const tagSelected of tagsSelected) {
                 if (resource.tags.some(tag => tag.id===tagSelected.id)) {
@@ -17,12 +19,30 @@ export default function ResourceList(props: { tags: ITag[], allResources: IResou
                 }
             }
             return false;
+
         })
-    } else {
-        filteredResources = props.allResources;
+    } else if (tagsSelected.length === 0 && search.length !== 0) { //filtering for search term only
+        filteredResources = props.allResources.filter((resource) => {
+            console.log(resource.author_name, resource.resource_name, resource.description, resource.tags)
+            return resource.author_name.includes(search) || resource.resource_name.includes(search) || resource.description.includes(search) || resource.tags.some(tag => tag.name.includes(search))
+        })
+    } else if (tagsSelected.length !== 0 && search.length !== 0) { //filtering for both tags and search term
+        const filteredTags = props.allResources.filter((resource) => {
+            for (const tagSelected of tagsSelected) {
+                if (resource.tags.some(tag => tag.id===tagSelected.id)) {
+                    return true;
+                }
+            }
+            return false;
+
+        })
+        filteredResources = filteredTags.filter((resource) => {
+            // console.log(resource);
+            return resource.author_name.includes(search) || resource.resource_name.includes(search) || resource.description.includes(search) || resource.tags.some(tag => tag.name.includes(search))
+        })
     }
 
-    console.log(props.allResources, filteredResources)
+    // console.log(props.allResources)
 
     const handleTagClick = (tag: ITag) => {
         let newTags: ITag[] ;
@@ -49,6 +69,7 @@ export default function ResourceList(props: { tags: ITag[], allResources: IResou
             id={resource.id}
             resource_name={resource.resource_name}
             author_name={resource.author_name}
+            description={resource.description}
             tags={resource.tags}
             creation_date={resource.creation_date}
             likes={resource.likes}
