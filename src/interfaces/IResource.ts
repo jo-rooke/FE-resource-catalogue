@@ -4,6 +4,7 @@ export interface IResource {
   resource_name: string;
   author_name: string;
   tags: ITag[];
+  description: string;
 }
 
 export interface IResourceShort extends IResource {
@@ -17,7 +18,6 @@ export interface IResourceShort extends IResource {
 export interface IResourceAdd extends IResource {
   // for POST /resources
   url: string;
-  description: string;
   content_type: string;
   week_no: number;
   recommender_id: number;
@@ -28,7 +28,6 @@ export interface IResourceAdd extends IResource {
 export interface IResourceLong extends IResourceShort {
   // for GET /resources/:id
   url: string;
-  description: string;
   content_type: string;
   week_no: number;
   recommender_id: number;
