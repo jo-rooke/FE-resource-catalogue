@@ -4,13 +4,13 @@ export interface IResource {
   resource_name: string;
   author_name: string;
   tags: ITag[];
+  description: string;
 }
 
 export interface IResourceShort extends IResource {
   // for GET /resources
   id: number;
   creation_date: string;
-  description: string;
   likes: number;
   dislikes: number;
 }
