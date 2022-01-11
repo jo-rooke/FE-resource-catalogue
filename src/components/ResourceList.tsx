@@ -10,6 +10,7 @@ export default function ResourceList(props: {
   tags: ITag[];
   allResources: IResourceShort[];
   user: IUser | undefined;
+  setAllResources: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
 }): JSX.Element {
   const [search, setSearch] = useState("");
   const [tagsSelected, setTagsSelected] = useState<ITag[]>([]);
@@ -65,15 +66,9 @@ export default function ResourceList(props: {
       {filteredResources.map((resource) => (
         <Resource
           key={resource.id}
-          id={resource.id}
-          resource_name={resource.resource_name}
-          author_name={resource.author_name}
-          description={resource.description}
-          tags={resource.tags}
-          creation_date={resource.creation_date}
-          likes={resource.likes}
-          dislikes={resource.dislikes}
+          resource={resource}
           user={props.user}
+          setAllResources={props.setAllResources}
         />
       ))}
     </>

@@ -17,10 +17,6 @@ export interface IResourceShort extends IResource {
   dislikes?: number;
 }
 
-export interface ResourceComponentProps extends IResourceShort {
-  user: IUser | undefined;
-}
-
 export interface IResourceAdd extends IResource {
   // for POST /resources
   url: string;
