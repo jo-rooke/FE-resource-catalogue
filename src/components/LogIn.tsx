@@ -5,16 +5,48 @@ export default function LogIn(props: {
   allUsers: IUser[];
   user: IUser | undefined;
   setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>;
-  loggedIn: boolean;
-  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element {
+  const Dropdown = (): JSX.Element => {
+    return (
+      <>
+        <label>Login: </label>
+        <select
+          id="login"
+          defaultValue={""}
+          // placeholder="Select your name"
+          onChange={(e) =>
+            props.setUser(
+              props.allUsers.filter(
+                (user) => user.id === parseInt(e.target.value)
+              )[0]
+            )
+          }
+        >
+          <option value="" disabled>
+            Please select your name
+          </option>
+          {props.allUsers.map((user) => (
+            <option key={user.id} value={user.id}>
+              {user.name}
+            </option>
+          ))}
+        </select>
+      </>
+    );
+  };
+
   return (
     <>
-      {props.loggedIn && props.user !== undefined ? (
-        <p>Hello, {props.user.name}</p>
+      {props.user !== undefined ? (
+        <>
+          <p>Hello, {props.user.name}</p>
+          <button onClick={() => props.setUser(undefined)}>Log out</button>
+        </>
       ) : (
-        "LogInDropDown"
+        <Dropdown />
       )}
+
+      <hr />
     </>
   );
 }
