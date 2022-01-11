@@ -1,4 +1,8 @@
-import { BrowserRouter as Router, Route, Routes, /*Link*/ } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes /*Link*/,
+} from "react-router-dom";
 import { useEffect, useState } from "react";
 import Home from "./routes/Home";
 import IndividualResource from "./routes/IndividualResource";
@@ -28,7 +32,17 @@ function App(): JSX.Element {
           <Route
             path="/"
             element={
-              <Home {...{ loggedIn, setLoggedIn, user, setUser, allUsers, tags, allResources }} />
+              <Home
+                {...{
+                  loggedIn,
+                  setLoggedIn,
+                  user,
+                  setUser,
+                  allUsers,
+                  tags,
+                  allResources,
+                }}
+              />
             }
           />
           <Route path="/dashboard" element={<HomeLoggedIn />} />

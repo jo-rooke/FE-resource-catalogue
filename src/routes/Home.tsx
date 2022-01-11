@@ -24,7 +24,7 @@ export default function Home(props: {
         loggedIn={props.loggedIn}
         setLoggedIn={props.setLoggedIn}
       />
-      <ResourceList tags={props.tags} allResources={props.allResources}/>
+      <ResourceList tags={props.tags} allResources={props.allResources} />
       <div>Home Page</div>
     </>
   );
