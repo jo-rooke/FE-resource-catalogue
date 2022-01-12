@@ -6,6 +6,7 @@ import { baseUrl } from "../utils/baseUrl";
 import { unclickableTags } from "../utils/unclickableTags";
 import { IUser } from "../interfaces/IUser";
 import PageHeader from "../components/PageHeader";
+import { timestampFormatter } from "../utils/timestampFormatter";
 
 export default function IndividualResource(props: {
   user: IUser | undefined;
@@ -39,7 +40,11 @@ export default function IndividualResource(props: {
           <h3>Dislikes: {resource[0].dislikes}</h3>
           <h3>Author: {resource[0].author_name}</h3>
           <h3>Recommended by: {resource[0].name}</h3>
-          <h3>Creation date: {resource[0].creation_date}</h3>
+          {resource[0].creation_date !== undefined && (
+            <h3>
+              Creation date: {timestampFormatter(resource[0].creation_date)}
+            </h3>
+          )}
           <div>{resource[0].tags.map((tag) => unclickableTags(tag))}</div>
           <h3>Week number: {resource[0].week_no}</h3>
           <h3>Content type: {resource[0].content_type}</h3>
