@@ -11,29 +11,51 @@ export default function ResourceList(props: {
   allResources: IResourceShort[];
   user: IUser | undefined;
   setAllResources: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
+  studyList: IResourceShort[];
+  setStudyList: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
 }): JSX.Element {
   const [search, setSearch] = useState("");
   const [tagsSelected, setTagsSelected] = useState<ITag[]>([]);
 
   let filteredResources: IResourceShort[] = props.allResources;
-  //filtering for tags only
+
+  //filtering out resources that are already in the study list
+  let arrayToFilter;
+  if (props.studyList.length > 0) {
+    arrayToFilter = props.allResources.filter((singleResource) => {
+      for (const listItem of props.studyList) {
+        console.log(listItem.id, "list item id");
+        console.log(singleResource.id, "single resource id");
+        if (listItem.id === singleResource.id) {
+          return false;
+        }
+      }
+      return true;
+    });
+  } else {
+    arrayToFilter = props.allResources;
+  }
+
   if (tagsSelected.length !== 0 && search.length === 0) {
-    filteredResources = props.allResources.filter((singleResource) =>
+    //filtering for tags only
+    filteredResources = arrayToFilter.filter((singleResource) =>
       filterTags(tagsSelected, singleResource)
     );
   } else if (tagsSelected.length === 0 && search.length !== 0) {
     //filtering for search term only
-    filteredResources = props.allResources.filter((resource) =>
+    filteredResources = arrayToFilter.filter((resource) =>
       filterSearch(search, resource)
     );
   } else if (tagsSelected.length !== 0 && search.length !== 0) {
     //filtering for both tags and search term
-    const filteredTags = props.allResources.filter((resource) =>
+    const filteredTags = arrayToFilter.filter((resource) =>
       filterTags(tagsSelected, resource)
     );
     filteredResources = filteredTags.filter((resource) =>
       filterSearch(search, resource)
     );
+  } else {
+    filteredResources = arrayToFilter;
   }
 
   const handleTagClick = (tag: ITag) => {
@@ -69,6 +91,8 @@ export default function ResourceList(props: {
           resource={resource}
           user={props.user}
           setAllResources={props.setAllResources}
+          studyList={props.studyList}
+          setStudyList={props.setStudyList}
         />
       ))}
     </>

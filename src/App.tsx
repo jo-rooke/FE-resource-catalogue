@@ -20,6 +20,7 @@ function App(): JSX.Element {
   const [allUsers, setAllUsers] = useState<IUser[]>([]);
   const [user, setUser] = useState<IUser | undefined>();
   const [tags, setTags] = useState<ITag[]>([]);
+  const [studyList, setStudyList] = useState<IResourceShort[]>([]);
   useEffect(() => {
     fetchData(baseUrl + "/resources", setAllResources);
     fetchData(baseUrl + "/users", setAllUsers);
@@ -42,6 +43,8 @@ function App(): JSX.Element {
                   tags,
                   allResources,
                   setAllResources,
+                  studyList,
+                  setStudyList,
                 }}
               />
             }

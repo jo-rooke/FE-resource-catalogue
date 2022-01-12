@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchData } from "../utils/fetchData";
 import { baseUrl } from "../utils/baseUrl";
 import { IResourceShort } from "../interfaces/IResource";
 import { IUser } from "../interfaces/IUser";
 import { handleRemoveFromStudyList } from "../utils/handleRemoveFromStudyList";
 
-export default function ToStudyList(props: { user: IUser }): JSX.Element {
-  const [studyList, setStudyList] = useState<IResourceShort[]>([]);
+export default function ToStudyList(props: {
+  user: IUser;
+  studyList: IResourceShort[];
+  setStudyList: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
+}): JSX.Element {
   useEffect(() => {
-    fetchData(baseUrl + `/to-study-list/${props.user.id}`, setStudyList);
-  }, [props.user.id]);
+    fetchData(baseUrl + `/to-study-list/${props.user.id}`, props.setStudyList);
+  }, [props.user.id, props.setStudyList]);
 
   const StudyItem = (item: IResourceShort): JSX.Element => {
     return (
@@ -27,7 +30,11 @@ export default function ToStudyList(props: { user: IUser }): JSX.Element {
         <td>
           <button
             onClick={() =>
-              handleRemoveFromStudyList(props.user.id, item.id, setStudyList)
+              handleRemoveFromStudyList(
+                props.user.id,
+                item.id,
+                props.setStudyList
+              )
             }
           >
             Remove
@@ -36,23 +43,25 @@ export default function ToStudyList(props: { user: IUser }): JSX.Element {
       </tr>
     );
   };
-  console.log(studyList);
-
   return (
     <div>
       <h2>My To-Study List</h2>
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Resource name</th>
-            <th scope="col">Tags</th>
-            <th scope="col">Author name</th>
-            <th scope="col">More details</th>
-            <th scope="col">Remove</th>
-          </tr>
-        </thead>
-        <tbody>{studyList.map((item) => StudyItem(item))}</tbody>
-      </table>
+      {props.studyList.length === 0 ? (
+        "Nothing in your study list, why not add a resource by clicking +?"
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Resource name</th>
+              <th scope="col">Tags</th>
+              <th scope="col">Author name</th>
+              <th scope="col">More details</th>
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody>{props.studyList.map((item) => StudyItem(item))}</tbody>
+        </table>
+      )}
     </div>
   );
 }
