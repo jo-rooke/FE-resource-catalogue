@@ -61,7 +61,7 @@ function App(): JSX.Element {
               />
             }
           />
-          <Route path="/resources/add" element={<AddResource />} />
+          <Route path="/resources/add" element={<AddResource user={user}/>} />
         </Routes>
       </Router>
     </div>
