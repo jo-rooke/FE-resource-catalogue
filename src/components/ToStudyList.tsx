@@ -1,33 +1,40 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchData } from "../utils/fetchData";
 import { baseUrl } from "../utils/baseUrl";
 import { IResourceShort } from "../interfaces/IResource";
 import { IUser } from "../interfaces/IUser";
 import { handleRemoveFromStudyList } from "../utils/handleRemoveFromStudyList";
+import { unclickableTags } from "../utils/unclickableTags";
+import { Link } from "react-router-dom";
 
-export default function ToStudyList(props: { user: IUser }): JSX.Element {
-  const [studyList, setStudyList] = useState<IResourceShort[]>([]);
+export default function ToStudyList(props: {
+  user: IUser;
+  studyList: IResourceShort[];
+  setStudyList: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
+}): JSX.Element {
   useEffect(() => {
-    fetchData(baseUrl + `/to-study-list/${props.user.id}`, setStudyList);
-  }, [props.user.id]);
+    fetchData(baseUrl + `/to-study-list/${props.user.id}`, props.setStudyList);
+  }, [props.user.id, props.setStudyList]);
 
   const StudyItem = (item: IResourceShort): JSX.Element => {
     return (
       <tr key={item.id}>
         <td>{item.resource_name}</td>
-        <td>
-          {item.tags.map((tag) => (
-            <button key={tag.id} disabled>
-              {tag.name}
-            </button>
-          ))}
-        </td>
+        <td>{item.tags.map((tag) => unclickableTags(tag))}</td>
         <td>{item.author_name}</td>
-        <td>URL {item.id}</td>
+        <td>
+          <Link to={`/resources/${item.id}`}>
+            <button>See more</button>
+          </Link>
+        </td>
         <td>
           <button
             onClick={() =>
-              handleRemoveFromStudyList(props.user.id, item.id, setStudyList)
+              handleRemoveFromStudyList(
+                props.user.id,
+                item.id,
+                props.setStudyList
+              )
             }
           >
             Remove
@@ -36,7 +43,6 @@ export default function ToStudyList(props: { user: IUser }): JSX.Element {
       </tr>
     );
   };
-  console.log(studyList);
 
   return (
     <div>
@@ -51,7 +57,7 @@ export default function ToStudyList(props: { user: IUser }): JSX.Element {
             <th scope="col">Remove</th>
           </tr>
         </thead>
-        <tbody>{studyList.map((item) => StudyItem(item))}</tbody>
+        <tbody>{props.studyList.map((item) => StudyItem(item))}</tbody>
       </table>
     </div>
   );
