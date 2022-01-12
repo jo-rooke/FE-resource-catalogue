@@ -41,6 +41,7 @@ function App(): JSX.Element {
                   allUsers,
                   tags,
                   allResources,
+                  setAllResources,
                 }}
               />
             }

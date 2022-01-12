@@ -43,22 +43,25 @@ export default function ToStudyList(props: {
       </tr>
     );
   };
-
   return (
     <div>
       <h2>My To-Study List</h2>
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">Resource name</th>
-            <th scope="col">Tags</th>
-            <th scope="col">Author name</th>
-            <th scope="col">More details</th>
-            <th scope="col">Remove</th>
-          </tr>
-        </thead>
-        <tbody>{props.studyList.map((item) => StudyItem(item))}</tbody>
-      </table>
+      {props.studyList.length === 0 ? (
+        "Nothing in your study list, why not add a resource by clicking +?"
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Resource name</th>
+              <th scope="col">Tags</th>
+              <th scope="col">Author name</th>
+              <th scope="col">More details</th>
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody>{props.studyList.map((item) => StudyItem(item))}</tbody>
+        </table>
+      )}
     </div>
   );
 }

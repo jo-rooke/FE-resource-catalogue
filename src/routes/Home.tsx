@@ -12,6 +12,7 @@ export default function Home(props: {
   allUsers: IUser[];
   tags: ITag[];
   allResources: IResourceShort[];
+  setAllResources: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
   studyList: IResourceShort[];
   setStudyList: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
 }): JSX.Element {
@@ -30,8 +31,14 @@ export default function Home(props: {
           setStudyList={props.setStudyList}
         />
       )}
-      <ResourceList tags={props.tags} allResources={props.allResources} />
-      <div>Home Page</div>
+      <ResourceList
+        tags={props.tags}
+        allResources={props.allResources}
+        user={props.user}
+        setAllResources={props.setAllResources}
+        studyList={props.studyList}
+        setStudyList={props.setStudyList}
+      />
     </>
   );
 }
