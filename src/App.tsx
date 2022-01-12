@@ -15,7 +15,6 @@ import { fetchData } from "./utils/fetchData";
 import { baseUrl } from "./utils/baseUrl";
 
 function App(): JSX.Element {
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [allResources, setAllResources] = useState<IResourceShort[]>([]);
   const [allUsers, setAllUsers] = useState<IUser[]>([]);
   const [user, setUser] = useState<IUser | undefined>();
@@ -35,10 +34,10 @@ function App(): JSX.Element {
             element={
               <Home
                 {...{
-                  loggedIn,
-                  setLoggedIn,
                   user,
                   setUser,
+                  studyList,
+                  setStudyList,
                   allUsers,
                   tags,
                   allResources,
@@ -50,8 +49,21 @@ function App(): JSX.Element {
             }
           />
           <Route path="/dashboard" element={<HomeLoggedIn />} />
-          <Route path="/resource/:id" element={<IndividualResource />} />
-          <Route path="/resource/add" element={<AddResource />} />
+          <Route
+            path="/resources/:id"
+            element={
+              <IndividualResource
+                {...{
+                  studyList,
+                  setStudyList,
+                  user,
+                  setUser,
+                  allUsers,
+                }}
+              />
+            }
+          />
+          <Route path="/resources/add" element={<AddResource />} />
         </Routes>
       </Router>
     </div>

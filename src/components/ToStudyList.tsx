@@ -4,6 +4,8 @@ import { baseUrl } from "../utils/baseUrl";
 import { IResourceShort } from "../interfaces/IResource";
 import { IUser } from "../interfaces/IUser";
 import { handleRemoveFromStudyList } from "../utils/handleRemoveFromStudyList";
+import { unclickableTags } from "../utils/unclickableTags";
+import { Link } from "react-router-dom";
 
 export default function ToStudyList(props: {
   user: IUser;
@@ -18,15 +20,13 @@ export default function ToStudyList(props: {
     return (
       <tr key={item.id}>
         <td>{item.resource_name}</td>
-        <td>
-          {item.tags.map((tag) => (
-            <button key={tag.id} disabled>
-              {tag.name}
-            </button>
-          ))}
-        </td>
+        <td>{item.tags.map((tag) => unclickableTags(tag))}</td>
         <td>{item.author_name}</td>
-        <td>URL {item.id}</td>
+        <td>
+          <Link to={`/resources/${item.id}`}>
+            <button>See more</button>
+          </Link>
+        </td>
         <td>
           <button
             onClick={() =>
