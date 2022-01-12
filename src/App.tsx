@@ -42,8 +42,6 @@ function App(): JSX.Element {
                   tags,
                   allResources,
                   setAllResources,
-                  studyList,
-                  setStudyList,
                 }}
               />
             }
