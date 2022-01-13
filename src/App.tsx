@@ -62,7 +62,27 @@ function App(): JSX.Element {
               />
             }
           />
-          <Route path="/resources/add" element={user? <AddResource tags={tags} user={user} allUsers={allUsers} setAllResources={setAllResources} setUser={setUser}/> : <PageHeader title={"Add a Resource"} allUsers={allUsers} user={user} setUser={setUser}/>} />
+          <Route
+            path="/resources/add"
+            element={
+              user ? (
+                <AddResource
+                  tags={tags}
+                  user={user}
+                  allUsers={allUsers}
+                  setAllResources={setAllResources}
+                  setUser={setUser}
+                />
+              ) : (
+                <PageHeader
+                  title={"Add a Resource"}
+                  allUsers={allUsers}
+                  user={user}
+                  setUser={setUser}
+                />
+              )
+            }
+          />
         </Routes>
       </Router>
     </div>
