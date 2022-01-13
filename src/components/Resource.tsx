@@ -4,6 +4,7 @@ import { fetchData } from "../utils/fetchData";
 import { IResourceShort } from "../interfaces/IResource";
 import { IUser } from "../interfaces/IUser";
 import { unclickableTags } from "../utils/unclickableTags";
+import { Link } from "react-router-dom";
 
 export default function Resource(props: {
   resource: IResourceShort;
@@ -32,7 +33,9 @@ export default function Resource(props: {
 
   return (
     <>
-      <h3>{props.resource.resource_name}</h3>
+      <Link to={`/resources/${props.resource.id}`}>
+        <h3>{props.resource.resource_name}</h3>
+      </Link>
       {props.user !== undefined && (
         <button onClick={handleAddToStudyList}>+</button>
       )}
