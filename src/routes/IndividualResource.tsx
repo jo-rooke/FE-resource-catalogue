@@ -21,7 +21,6 @@ export default function IndividualResource(props: {
   useEffect(() => {
     fetchData(baseUrl + `/resources/${id}`, setResource);
   }, [id]);
-  console.log(resource);
 
   return (
     <>
@@ -36,8 +35,8 @@ export default function IndividualResource(props: {
       ) : (
         <div>
           <h2>{resource[0].resource_name}</h2>
-          <h3>Likes: {resource[0].likes}</h3>
-          <h3>Dislikes: {resource[0].dislikes}</h3>
+          <h3>👍: {resource[0].likes}</h3>
+          <h3>👎: {resource[0].dislikes}</h3>
           <h3>Author: {resource[0].author_name}</h3>
           <h3>Recommended by: {resource[0].name}</h3>
           {resource[0].creation_date !== undefined && (
