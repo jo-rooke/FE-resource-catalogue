@@ -36,7 +36,9 @@ export default function LogIn(props: {
     <>
       {props.user !== undefined ? (
         <>
-          <p>Hello, {props.user.name}</p>
+          <p>
+            Hello, {props.user.name} {props.user.is_faculty ? "👨🏻‍🏫" : "👨‍🎓"}
+          </p>
           <button onClick={() => props.setUser(undefined)}>Log out</button>
         </>
       ) : (
