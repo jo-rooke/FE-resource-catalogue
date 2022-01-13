@@ -23,6 +23,7 @@ export default function Home(props: {
         allUsers={props.allUsers}
         user={props.user}
         setUser={props.setUser}
+        setStudyList={props.setStudyList}
       />
       {props.user !== undefined && (
         <ToStudyList

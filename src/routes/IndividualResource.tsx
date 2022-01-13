@@ -29,6 +29,7 @@ export default function IndividualResource(props: {
         allUsers={props.allUsers}
         user={props.user}
         setUser={props.setUser}
+        setStudyList={props.setStudyList}
       />
       {resource.length === 0 ? (
         <h2>Loading...</h2>
