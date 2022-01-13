@@ -3,6 +3,7 @@ import { baseUrl } from "../utils/baseUrl";
 import { fetchData } from "../utils/fetchData";
 import { IResourceShort } from "../interfaces/IResource";
 import { IUser } from "../interfaces/IUser";
+import { unclickableTags } from "../utils/unclickableTags";
 
 export default function Resource(props: {
   resource: IResourceShort;
@@ -35,9 +36,7 @@ export default function Resource(props: {
       {props.user !== undefined && (
         <button onClick={handleAddToStudyList}>+</button>
       )}
-      {props.resource.tags.map((tag) => (
-        <p key={tag.id}>#{tag.name} </p>
-      ))}
+      {props.resource.tags.map((tag) => unclickableTags(tag))}
       <p>by {props.resource.author_name}</p>
       <h3>👍</h3>
       {props.resource.likes} <h3>👎</h3>
