@@ -9,6 +9,7 @@ import { IResourceShort } from "./interfaces/IResource";
 import { ITag } from "./interfaces/ITag";
 import { fetchData } from "./utils/fetchData";
 import { baseUrl } from "./utils/baseUrl";
+import PageHeader from "./components/PageHeader";
 
 function App(): JSX.Element {
   const [allResources, setAllResources] = useState<IResourceShort[]>([]);
@@ -57,7 +58,27 @@ function App(): JSX.Element {
               />
             }
           />
-          <Route path="/resources/add" element={<AddResource />} />
+          <Route
+            path="/resources/add"
+            element={
+              user ? (
+                <AddResource
+                  tags={tags}
+                  user={user}
+                  allUsers={allUsers}
+                  setAllResources={setAllResources}
+                  setUser={setUser}
+                />
+              ) : (
+                <PageHeader
+                  title={"Add a Resource"}
+                  allUsers={allUsers}
+                  user={user}
+                  setUser={setUser}
+                />
+              )
+            }
+          />
         </Routes>
       </Router>
     </div>
