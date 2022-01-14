@@ -5,6 +5,7 @@ import Resource from "./Resource";
 import filterSearchAndTags from "../utils/filterSearchAndTags";
 import filterOutStudyList from "../utils/filterOutStudyList";
 import { IUser } from "../interfaces/IUser";
+import { Link } from "react-router-dom";
 
 export default function ResourceList(props: {
   tags: ITag[];
@@ -43,7 +44,11 @@ export default function ResourceList(props: {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       ></input>
-      {props.user && <button>Add a new resource</button>}
+      {props.user && (
+        <Link to="/resources/add">
+          <button>Add a new resource</button>
+        </Link>
+      )}
       {props.allResources
         .filter((item) => filterOutStudyList(item, props.studyList))
         .filter((item) => filterSearchAndTags(item, tagsSelected, search))
