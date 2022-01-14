@@ -2,36 +2,21 @@ import { IResourceShort } from "../interfaces/IResource";
 import { ITag } from "../interfaces/ITag";
 import { useState } from "react";
 import Resource from "./Resource";
-import filterTags from "../utils/filterTags";
-import filterSearch from "../utils/filterSearch";
+import filterSearchAndTags from "../utils/filterSearchAndTags";
+import filterOutStudyList from "../utils/filterOutStudyList";
+import { IUser } from "../interfaces/IUser";
+import { Link } from "react-router-dom";
 
 export default function ResourceList(props: {
   tags: ITag[];
   allResources: IResourceShort[];
+  user: IUser | undefined;
+  setAllResources: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
+  studyList: IResourceShort[];
+  setStudyList: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
 }): JSX.Element {
   const [search, setSearch] = useState("");
   const [tagsSelected, setTagsSelected] = useState<ITag[]>([]);
-
-  let filteredResources: IResourceShort[] = props.allResources;
-  //filtering for tags only
-  if (tagsSelected.length !== 0 && search.length === 0) {
-    filteredResources = props.allResources.filter((singleResource) =>
-      filterTags(tagsSelected, singleResource)
-    );
-  } else if (tagsSelected.length === 0 && search.length !== 0) {
-    //filtering for search term only
-    filteredResources = props.allResources.filter((resource) =>
-      filterSearch(search, resource)
-    );
-  } else if (tagsSelected.length !== 0 && search.length !== 0) {
-    //filtering for both tags and search term
-    const filteredTags = props.allResources.filter((resource) =>
-      filterTags(tagsSelected, resource)
-    );
-    filteredResources = filteredTags.filter((resource) =>
-      filterSearch(search, resource)
-    );
-  }
 
   const handleTagClick = (tag: ITag) => {
     let newTags: ITag[];
@@ -48,6 +33,7 @@ export default function ResourceList(props: {
   return (
     <>
       <h2>Recommendations</h2>
+
       {props.tags.map((tag) => (
         <button key={tag.id} onClick={() => handleTagClick(tag)}>
           {tag.name}
@@ -58,19 +44,24 @@ export default function ResourceList(props: {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       ></input>
-      {filteredResources.map((resource) => (
-        <Resource
-          key={resource.id}
-          id={resource.id}
-          resource_name={resource.resource_name}
-          author_name={resource.author_name}
-          description={resource.description}
-          tags={resource.tags}
-          creation_date={resource.creation_date}
-          likes={resource.likes}
-          dislikes={resource.dislikes}
-        />
-      ))}
+      {props.user && (
+        <Link to="/resources/add">
+          <button>Add a new resource</button>
+        </Link>
+      )}
+      {props.allResources
+        .filter((item) => filterOutStudyList(item, props.studyList))
+        .filter((item) => filterSearchAndTags(item, tagsSelected, search))
+        .map((resource) => (
+          <Resource
+            key={resource.id}
+            resource={resource}
+            user={props.user}
+            setAllResources={props.setAllResources}
+            studyList={props.studyList}
+            setStudyList={props.setStudyList}
+          />
+        ))}
     </>
   );
 }

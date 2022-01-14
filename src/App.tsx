@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes /*Link*/,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Home from "./routes/Home";
 import IndividualResource from "./routes/IndividualResource";
@@ -13,13 +9,14 @@ import { IResourceShort } from "./interfaces/IResource";
 import { ITag } from "./interfaces/ITag";
 import { fetchData } from "./utils/fetchData";
 import { baseUrl } from "./utils/baseUrl";
+import PageHeader from "./components/PageHeader";
 
 function App(): JSX.Element {
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [allResources, setAllResources] = useState<IResourceShort[]>([]);
   const [allUsers, setAllUsers] = useState<IUser[]>([]);
   const [user, setUser] = useState<IUser | undefined>();
   const [tags, setTags] = useState<ITag[]>([]);
+  const [studyList, setStudyList] = useState<IResourceShort[]>([]);
   useEffect(() => {
     fetchData(baseUrl + "/resources", setAllResources);
     fetchData(baseUrl + "/users", setAllUsers);
@@ -34,20 +31,57 @@ function App(): JSX.Element {
             element={
               <Home
                 {...{
-                  loggedIn,
-                  setLoggedIn,
                   user,
                   setUser,
+                  studyList,
+                  setStudyList,
                   allUsers,
                   tags,
                   allResources,
+                  setAllResources,
                 }}
               />
             }
           />
           <Route path="/dashboard" element={<HomeLoggedIn />} />
-          <Route path="/resource/:id" element={<IndividualResource />} />
-          <Route path="/resource/add" element={<AddResource />} />
+          <Route
+            path="/resources/:id"
+            element={
+              <IndividualResource
+                {...{
+                  studyList,
+                  setStudyList,
+                  user,
+                  setUser,
+                  allUsers,
+                }}
+              />
+            }
+          />
+          <Route
+            path="/resources/add"
+            element={
+              user ? (
+                <AddResource
+                  tags={tags}
+                  user={user}
+                  allUsers={allUsers}
+                  setAllResources={setAllResources}
+                  setUser={setUser}
+                  setStudyList={setStudyList}
+                  allResources={allResources}
+                />
+              ) : (
+                <PageHeader
+                  title={"Add a Resource"}
+                  allUsers={allUsers}
+                  user={user}
+                  setUser={setUser}
+                  setStudyList={setStudyList}
+                />
+              )
+            }
+          />
         </Routes>
       </Router>
     </div>
