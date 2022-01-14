@@ -7,6 +7,7 @@ import isObjectDefined from "../utils/isObjectDefined";
 import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 import { fetchData } from "../utils/fetchData";
+import doesUrlExist from "../utils/doesUrlExist";
 
 export default function AddResource(props: {
   user: IUser;
@@ -15,6 +16,7 @@ export default function AddResource(props: {
   setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>;
   setAllResources: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
   setStudyList: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
+  allResources: IResourceShort[];
 }): JSX.Element {
   const initialResource = {
     resource_name: "",
@@ -31,7 +33,6 @@ export default function AddResource(props: {
   const [resourceDetails, setResourceDetails] =
     useState<IResourceAdd>(initialResource);
 
-  console.log(resourceDetails);
   const changeResource = (
     e:
       | React.ChangeEvent<HTMLInputElement>
@@ -58,23 +59,28 @@ export default function AddResource(props: {
     setResourceDetails({ ...resourceDetails, tags: tags });
   };
 
-  async function handleAddResource() {
-    if (isObjectDefined(resourceDetails)) {
-      //fix function
-      try {
-        await axios
-          .post(baseUrl + "/resources", resourceDetails)
-          .then(() => fetchData(baseUrl + "/resources", props.setAllResources))
-          .then(() => setResourceDetails(initialResource));
-      } catch (err) {
-        console.log(err);
+  function handleAddResource() {
+    if (!doesUrlExist(props.allResources, resourceDetails)) {
+      if (isObjectDefined(resourceDetails)) {
+        try {
+          axios
+            .post(baseUrl + "/resources", resourceDetails)
+            .then(() =>
+              fetchData(baseUrl + "/resources", props.setAllResources)
+            )
+            .then(() => setResourceDetails(initialResource))
+            .then(() => window.alert("submission successful"));
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        window.alert("please fill in all fields");
       }
     } else {
-      window.alert("please fill in all fields");
+      window.alert("resource with this url has already been submitted");
     }
   }
 
-  console.log(resourceDetails);
   return (
     <>
       <PageHeader

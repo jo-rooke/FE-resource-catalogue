@@ -29,7 +29,6 @@ export default function Resource(props: {
       }
     }
   }
-  console.log(props.studyList, props.resource);
 
   return (
     <>

@@ -15,6 +15,7 @@ export interface IResourceShort extends IResource {
   creation_date?: string;
   likes?: number;
   dislikes?: number;
+  url: string;
 }
 
 export interface IResourceAdd extends IResource {
@@ -29,7 +30,6 @@ export interface IResourceAdd extends IResource {
 
 export interface IResourceLong extends IResourceShort {
   // for GET /resources/:id
-  url: string;
   content_type: string;
   week_no: number;
   recommender_id: number;
