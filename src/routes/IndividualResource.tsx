@@ -7,6 +7,10 @@ import { unclickableTags } from "../utils/unclickableTags";
 import { IUser } from "../interfaces/IUser";
 import PageHeader from "../components/PageHeader";
 import { timestampFormatter } from "../utils/timestampFormatter";
+import { IComment } from "../interfaces/IComment";
+import SingleComment from "../components/SingleComment";
+import AddComment from "../components/AddComment";
+import { canUserComment } from "../utils/canUserComment";
 
 export default function IndividualResource(props: {
   user: IUser | undefined;
@@ -17,9 +21,11 @@ export default function IndividualResource(props: {
 }): JSX.Element {
   const { id } = useParams();
   const [resource, setResource] = useState<IResourceLong[]>([]);
+  const [comments, setComments] = useState<IComment[]>([]);
 
   useEffect(() => {
     fetchData(baseUrl + `/resources/${id}`, setResource);
+    fetchData(baseUrl + `/comments/${id}`, setComments);
   }, [id]);
 
   return (
@@ -54,6 +60,19 @@ export default function IndividualResource(props: {
             </a>
           </h3>
           <p>Description: {resource[0].description}</p>
+          {props.user === undefined ? (
+            <p>Please log in to comment.</p>
+          ) : id && canUserComment(props.user, comments) ? (
+            <AddComment
+              userId={props.user.id}
+              resourceId={parseInt(id)}
+              setComments={setComments}
+              setResource={setResource}
+            />
+          ) : (
+            <p>You have already added a comment.</p>
+          )}
+          {comments.map((item) => SingleComment(item))}
         </div>
       )}
     </>
