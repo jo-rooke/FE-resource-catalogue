@@ -75,6 +75,7 @@ function App(): JSX.Element {
                   allUsers={allUsers}
                   user={user}
                   setUser={setUser}
+                  setStudyList={setStudyList}
                 />
               )
             }
