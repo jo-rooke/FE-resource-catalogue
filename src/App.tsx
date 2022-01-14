@@ -68,6 +68,7 @@ function App(): JSX.Element {
                   allUsers={allUsers}
                   setAllResources={setAllResources}
                   setUser={setUser}
+                  setStudyList={setStudyList}
                 />
               ) : (
                 <PageHeader

@@ -14,6 +14,7 @@ export default function AddResource(props: {
   allUsers: IUser[];
   setUser: React.Dispatch<React.SetStateAction<IUser | undefined>>;
   setAllResources: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
+  setStudyList: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
 }): JSX.Element {
   const initialResource = {
     resource_name: "",
@@ -81,6 +82,7 @@ export default function AddResource(props: {
         allUsers={props.allUsers}
         user={props.user}
         setUser={props.setUser}
+        setStudyList={props.setStudyList}
       />
       <input
         value={resourceDetails.resource_name}
