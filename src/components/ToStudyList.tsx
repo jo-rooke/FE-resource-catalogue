@@ -44,7 +44,7 @@ export default function ToStudyList(props: {
     );
   };
   return (
-    <div>
+    <div data-cy="study-list">
       <h2>My To-Study List</h2>
       {props.studyList.length === 0 ? (
         "Nothing in your study list, why not add a resource by clicking +?"

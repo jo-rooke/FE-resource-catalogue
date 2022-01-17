@@ -82,7 +82,7 @@ export default function AddResource(props: {
   }
 
   return (
-    <>
+    <div data-cy="add-a-resource">
       <PageHeader
         title={"Add a Resource"}
         allUsers={props.allUsers}
@@ -103,27 +103,32 @@ export default function AddResource(props: {
         onChange={(e) => changeResource(e)}
       ></input>
       <input
+        data-cy="username"
         disabled={true}
         placeholder={props.user && "user name: " + props.user.name}
       ></input>
-      <p>Tags:</p>
-      {props.tags.map((tag) => (
-        <button key={tag.id} name="tags" onClick={() => handleClickTag(tag)}>
-          {tag.name}
-        </button>
-      ))}
+      <div data-cy="tags">
+        <p>Tags:</p>
+        {props.tags.map((tag) => (
+          <button key={tag.id} name="tags" onClick={() => handleClickTag(tag)}>
+            {tag.name}
+          </button>
+        ))}
+      </div>
       <input
         value={resourceDetails.content_type}
         name="content_type"
         placeholder={"Content Type e.g. video, article etc."}
         onChange={(e) => changeResource(e)}
       ></input>
-      <label htmlFor="week no">Week number: </label>
-      <select id="week no" name="week_no" onChange={(e) => changeResource(e)}>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-          <option key={num}>{num}</option>
-        ))}
-      </select>
+      <div data-cy="week-no">
+        <label htmlFor="week no">Week number: </label>
+        <select id="week no" name="week_no" onChange={(e) => changeResource(e)}>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+            <option key={num}>{num}</option>
+          ))}
+        </select>
+      </div>
       <input
         value={resourceDetails.url}
         name="url"
@@ -131,10 +136,10 @@ export default function AddResource(props: {
         onChange={(e) => changeResource(e)}
       ></input>
       <textarea
+        name="description"
         rows={8}
         cols={50}
         value={resourceDetails.description}
-        name="description"
         placeholder={"description"}
         onChange={(e) => changeResource(e)}
       ></textarea>
@@ -155,14 +160,16 @@ export default function AddResource(props: {
         ))}
       </select>
       <textarea
+        name="rec_message"
         rows={4}
         cols={50}
         value={resourceDetails.rec_message}
-        name="rec_message"
         placeholder={"What did you think of the resource?"}
         onChange={(e) => changeResource(e)}
       ></textarea>
-      <button onClick={handleAddResource}>Submit</button>
-    </>
+      <button data-cy="submit-new-resource" onClick={handleAddResource}>
+        Submit
+      </button>
+    </div>
   );
 }
