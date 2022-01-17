@@ -11,7 +11,7 @@ export default function LogIn(props: {
 }): JSX.Element {
   const Dropdown = (): JSX.Element => {
     return (
-      <>
+      <div data-cy="user-dropdown">
         <label>Login: </label>
         <select
           id="login"
@@ -30,15 +30,15 @@ export default function LogIn(props: {
             </option>
           ))}
         </select>
-      </>
+      </div>
     );
   };
 
   return (
-    <>
+    <div data-cy="login">
       {props.user !== undefined ? (
         <>
-          <p>
+          <p data-cy="greetings">
             Hello, {props.user.name} {props.user.is_faculty ? "👨🏻‍🏫" : "👨‍🎓"}
           </p>
           <button
@@ -46,6 +46,7 @@ export default function LogIn(props: {
               props.setUser(undefined);
               props.setStudyList([]);
             }}
+            data-cy="logout-button"
           >
             Log out
           </button>
@@ -55,6 +56,6 @@ export default function LogIn(props: {
       )}
 
       <hr />
-    </>
+    </div>
   );
 }

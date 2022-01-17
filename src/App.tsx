@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Home from "./routes/Home";
 import IndividualResource from "./routes/IndividualResource";
-import HomeLoggedIn from "./routes/HomeLoggedIn";
 import AddResource from "./routes/AddResource";
 import { IUser } from "./interfaces/IUser";
 import { IResourceShort } from "./interfaces/IResource";
@@ -43,7 +42,6 @@ function App(): JSX.Element {
               />
             }
           />
-          <Route path="/dashboard" element={<HomeLoggedIn />} />
           <Route
             path="/resources/:id"
             element={
