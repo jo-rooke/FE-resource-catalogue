@@ -9,6 +9,7 @@ import { ITag } from "./interfaces/ITag";
 import { fetchData } from "./utils/fetchData";
 import { baseUrl } from "./utils/baseUrl";
 import PageHeader from "./components/PageHeader";
+import { getUserById } from "./utils/getUserById";
 
 function App(): JSX.Element {
   const [allResources, setAllResources] = useState<IResourceShort[]>([]);
@@ -21,6 +22,13 @@ function App(): JSX.Element {
     fetchData(baseUrl + "/users", setAllUsers);
     fetchData(baseUrl + "/tags", setTags);
   }, []);
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("userId");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(getUserById(allUsers, foundUser));
+    }
+  }, [allUsers]);
   return (
     <div>
       <Router>
