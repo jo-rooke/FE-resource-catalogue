@@ -49,6 +49,7 @@ export default function LogIn(props: {
             onClick={() => {
               props.setUser(undefined);
               props.setStudyList([]);
+              localStorage.removeItem("userId");
             }}
             data-cy="logout-button"
           >
