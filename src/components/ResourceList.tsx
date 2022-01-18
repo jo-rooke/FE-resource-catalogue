@@ -31,14 +31,16 @@ export default function ResourceList(props: {
     setTagsSelected(newTags);
   };
   return (
-    <>
+    <div data-cy="resource-list">
       <h2>Recommendations</h2>
 
-      {props.tags.map((tag) => (
-        <button key={tag.id} onClick={() => handleTagClick(tag)}>
-          {tag.name}
-        </button>
-      ))}
+      <div data-cy="filtering-tags">
+        {props.tags.map((tag) => (
+          <button key={tag.id} onClick={() => handleTagClick(tag)}>
+            {tag.name}
+          </button>
+        ))}
+      </div>
       <input
         placeholder={"search for resource"}
         value={search}
@@ -46,7 +48,7 @@ export default function ResourceList(props: {
       ></input>
       {props.user && (
         <Link to="/resources/add">
-          <button>Add a new resource</button>
+          <button data-cy="add-resource-button">Add a new resource</button>
         </Link>
       )}
       {props.allResources
@@ -62,6 +64,6 @@ export default function ResourceList(props: {
             setStudyList={props.setStudyList}
           />
         ))}
-    </>
+    </div>
   );
 }

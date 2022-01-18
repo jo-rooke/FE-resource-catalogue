@@ -13,7 +13,7 @@ export default function PageHeader(props: {
   setStudyList: React.Dispatch<React.SetStateAction<IResourceShort[]>>;
 }): JSX.Element {
   return (
-    <>
+    <div data-cy="page-header">
       <Link to="/" title="Return home">
         <img alt="An okapi" src={Okapi} width={60} />
       </Link>
@@ -24,6 +24,6 @@ export default function PageHeader(props: {
         setUser={props.setUser}
         setStudyList={props.setStudyList}
       />
-    </>
+    </div>
   );
 }
