@@ -17,9 +17,13 @@ export default function LogIn(props: {
           id="login"
           defaultValue={""}
           // placeholder="Select your name"
-          onChange={(e) =>
-            props.setUser(getUserById(props.allUsers, parseInt(e.target.value)))
-          }
+          onChange={(e) => {
+            props.setUser(
+              getUserById(props.allUsers, parseInt(e.target.value))
+            );
+            localStorage.setItem("userId", e.target.value);
+            console.log(e.target.value);
+          }}
         >
           <option value="" disabled>
             Please select your name
@@ -45,6 +49,7 @@ export default function LogIn(props: {
             onClick={() => {
               props.setUser(undefined);
               props.setStudyList([]);
+              localStorage.removeItem("userId");
             }}
             data-cy="logout-button"
           >
