@@ -29,7 +29,7 @@ export default function IndividualResource(props: {
   }, [id]);
 
   return (
-    <>
+    <div data-cy="individual-resource">
       <PageHeader
         title={"Individual Resource"}
         allUsers={props.allUsers}
@@ -75,6 +75,6 @@ export default function IndividualResource(props: {
           {comments.map((item) => SingleComment(item))}
         </div>
       )}
-    </>
+    </div>
   );
 }
