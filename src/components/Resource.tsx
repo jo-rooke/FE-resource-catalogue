@@ -31,9 +31,9 @@ export default function Resource(props: {
   }
 
   return (
-    <div data-cy={`resource-item-${props.resource.id}`}>
+    <div data-cy="resource-item">
       <Link to={`/resources/${props.resource.id}`}>
-        <h3>{props.resource.resource_name}</h3>
+        <h3 data-cy="resource-header">{props.resource.resource_name}</h3>
       </Link>
       {props.user !== undefined && (
         <button onClick={handleAddToStudyList}>+</button>

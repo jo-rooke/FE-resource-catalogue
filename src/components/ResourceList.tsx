@@ -34,7 +34,7 @@ export default function ResourceList(props: {
     <div data-cy="resource-list">
       <h2>Recommendations</h2>
 
-      <div data-cy="tags">
+      <div data-cy="filtering-tags">
         {props.tags.map((tag) => (
           <button key={tag.id} onClick={() => handleTagClick(tag)}>
             {tag.name}
