@@ -42,24 +42,27 @@ export default function IndividualResource(props: {
       ) : (
         <div>
           <h2>{resource[0].resource_name}</h2>
-          <h3>👍: {resource[0].likes}</h3>
-          <h3>👎: {resource[0].dislikes}</h3>
-          <h3>Author: {resource[0].author_name}</h3>
-          <h3>Recommended by: {resource[0].name}</h3>
+          <h4>
+            👍 {resource[0].likes} 👎 {resource[0].dislikes}
+          </h4>
+          <p>Author: {resource[0].author_name}</p>
+          <p>Recommended by: {resource[0].name}</p>
           {resource[0].creation_date !== undefined && (
-            <h3>
+            <p>
               Creation date: {timestampFormatter(resource[0].creation_date)}
-            </h3>
+            </p>
           )}
           <div>{resource[0].tags.map((tag) => unclickableTags(tag))}</div>
-          <h3>Week number: {resource[0].week_no}</h3>
-          <h3>Content type: {resource[0].content_type}</h3>
-          <h3>
+          <p>Week number: {resource[0].week_no}</p>
+          <p>Content type: {resource[0].content_type}</p>
+          <p>
             <a href={resource[0].url} target="_blank" rel="noreferrer">
               Link to resource
             </a>
-          </h3>
+          </p>
           <p>Description: {resource[0].description}</p>
+          <hr />
+          <h2> Comments </h2>
           {props.user === undefined ? (
             <p>Please log in to comment.</p>
           ) : id && canUserComment(props.user, comments) ? (
@@ -72,6 +75,7 @@ export default function IndividualResource(props: {
           ) : (
             <p>You have already added a comment.</p>
           )}
+          <br />
           {comments.map((item) => SingleComment(item))}
         </div>
       )}

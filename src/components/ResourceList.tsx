@@ -32,38 +32,59 @@ export default function ResourceList(props: {
   };
   return (
     <div data-cy="resource-list">
-      <h2>Recommendations</h2>
+      <h2 className="my-2">Resources</h2>
 
       <div data-cy="filtering-tags">
+        <input
+          className="my-2"
+          placeholder={"search for resource"}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        ></input>
+        <br />
         {props.tags.map((tag) => (
-          <button key={tag.id} onClick={() => handleTagClick(tag)}>
+          <button
+            type="button"
+            className={
+              tagsSelected.includes(tag)
+                ? "btn btn-primary me-2 btn-sm"
+                : "btn btn-outline-primary me-2 btn-sm"
+            }
+            key={tag.id}
+            onClick={() => handleTagClick(tag)}
+          >
             {tag.name}
           </button>
         ))}
+        {props.user && (
+          <Link to="/resources/add">
+            <button
+              type="button"
+              className="my-2 btn btn-success"
+              data-cy="add-resource-button"
+            >
+              Add a new resource
+            </button>
+          </Link>
+        )}
       </div>
-      <input
-        placeholder={"search for resource"}
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      ></input>
-      {props.user && (
-        <Link to="/resources/add">
-          <button data-cy="add-resource-button">Add a new resource</button>
-        </Link>
-      )}
-      {props.allResources
-        .filter((item) => filterOutStudyList(item, props.studyList))
-        .filter((item) => filterSearchAndTags(item, tagsSelected, search))
-        .map((resource) => (
-          <Resource
-            key={resource.id}
-            resource={resource}
-            user={props.user}
-            setAllResources={props.setAllResources}
-            studyList={props.studyList}
-            setStudyList={props.setStudyList}
-          />
-        ))}
+      <div className="text-center my-2 d-flex justify-content-center">
+        <div className="row">
+          {props.allResources
+            .filter((item) => filterOutStudyList(item, props.studyList))
+            .filter((item) => filterSearchAndTags(item, tagsSelected, search))
+            .map((resource) => (
+              <Resource
+                key={resource.id}
+                resource={resource}
+                user={props.user}
+                setAllResources={props.setAllResources}
+                studyList={props.studyList}
+                setStudyList={props.setStudyList}
+              />
+            ))}
+        </div>
+      </div>
     </div>
   );
 }

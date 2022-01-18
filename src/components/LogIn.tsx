@@ -16,7 +16,7 @@ export default function LogIn(props: {
         <select
           id="login"
           defaultValue={""}
-          // placeholder="Select your name"
+          className="mx-1"
           onChange={(e) => {
             props.setUser(
               getUserById(props.allUsers, parseInt(e.target.value))
@@ -41,11 +41,13 @@ export default function LogIn(props: {
   return (
     <div data-cy="login">
       {props.user !== undefined ? (
-        <>
-          <p data-cy="greetings">
+        <div className="d-flex justify-content-between align-items-center">
+          <p className="col align-items-end" data-cy="greetings">
             Hello, {props.user.name} {props.user.is_faculty ? "👨🏻‍🏫" : "👨‍🎓"}
           </p>
           <button
+            type="button"
+            className="btn btn-danger btn-sm col align-items-center"
             onClick={() => {
               props.setUser(undefined);
               props.setStudyList([]);
@@ -55,12 +57,10 @@ export default function LogIn(props: {
           >
             Log out
           </button>
-        </>
+        </div>
       ) : (
         <Dropdown />
       )}
-
-      <hr />
     </div>
   );
 }
