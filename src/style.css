@@ -1,5 +1,6 @@
 .grid-container {
   display: grid;
+<<<<<<< HEAD
   grid-template-columns: 1fr 1fr 1fr;
 }
 
@@ -11,4 +12,7 @@
   border-radius: 2%;
   padding: 20px;
   margin: 5px;
+=======
+  grid-template-columns: auto auto auto;
+>>>>>>> ec046afb679930ff71925ceb2df960638f368d20
 }
