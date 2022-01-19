@@ -1,0 +1,14 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-item {
+  /* text-align: justify; */
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 2%;
+  padding: 20px;
+  margin: 5px;
+}
