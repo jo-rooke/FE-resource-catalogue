@@ -42,18 +42,45 @@ export default function AddComment(props: {
 
   return (
     <>
-      <form>
-        <label htmlFor="comment">Comment:</label>
-        <input
-          type="text"
-          name="comment"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        ></input>
-      </form>
-      <button onClick={() => setLike(true)}>👍</button>
-      <button onClick={() => setLike(false)}>👎</button>
-      <button onClick={() => handleSubmit(comment, like)}>Submit</button>
+      <div className="d-flex align-items-center">
+        <form>
+          <label htmlFor="comment" className="me-2">
+            Add a comment{" "}
+          </label>
+          <input
+            type="text"
+            name="comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          ></input>
+        </form>
+        <button
+          className={
+            like === true
+              ? "btn btn-outline-warning mx-2 align-items-center"
+              : "btn mx-2 align-items-center"
+          }
+          onClick={() => setLike(true)}
+        >
+          <h4> 👍 </h4>
+        </button>
+        <button
+          className={
+            like === false
+              ? "btn btn-outline-warning me-2 align-items-center"
+              : "btn me-2 align-items-center"
+          }
+          onClick={() => setLike(false)}
+        >
+          <h4> 👎</h4>
+        </button>
+        <button
+          className="btn btn-success me-2"
+          onClick={() => handleSubmit(comment, like)}
+        >
+          Submit
+        </button>
+      </div>
     </>
   );
 }

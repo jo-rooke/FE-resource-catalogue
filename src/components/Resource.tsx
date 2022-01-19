@@ -31,20 +31,23 @@ export default function Resource(props: {
   }
 
   return (
-    <div data-cy="resource-item">
+    <div
+      data-cy="resource-item"
+      className="p-2 col-3 border border-dark border-1 m-1 rounded"
+    >
       <Link to={`/resources/${props.resource.id}`}>
         <h3 data-cy="resource-header">{props.resource.resource_name}</h3>
       </Link>
       {props.user !== undefined && (
         <button onClick={handleAddToStudyList}>+</button>
       )}
-      <div data-cy="tags">
+      <div data-cy="tags" className="my-1">
         {props.resource.tags.map((tag) => unclickableTags(tag))}
       </div>
       <p>by {props.resource.author_name}</p>
-      <h3>👍</h3>
-      {props.resource.likes} <h3>👎</h3>
-      {props.resource.dislikes}
+      <h3>
+        👍 {props.resource.likes} 👎 {props.resource.dislikes}
+      </h3>
     </div>
   );
 }
