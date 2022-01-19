@@ -6,6 +6,7 @@ import filterSearchAndTags from "../utils/filterSearchAndTags";
 import filterOutStudyList from "../utils/filterOutStudyList";
 import { IUser } from "../interfaces/IUser";
 import { Link } from "react-router-dom";
+import "../style.css";
 
 export default function ResourceList(props: {
   tags: ITag[];
@@ -68,7 +69,8 @@ export default function ResourceList(props: {
           </Link>
         )}
       </div>
-      <div className="text-center my-2 d-flex justify-content-center">
+      <div className="grid-container">
+        {/* <div className="text-center my-2 d-flex justify-content-center"> */}
         <div className="row">
           {props.allResources
             .filter((item) => filterOutStudyList(item, props.studyList))
