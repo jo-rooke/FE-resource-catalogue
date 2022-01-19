@@ -22,7 +22,6 @@ export default function LogIn(props: {
               getUserById(props.allUsers, parseInt(e.target.value))
             );
             localStorage.setItem("userId", e.target.value);
-            console.log(e.target.value);
           }}
         >
           <option value="" disabled>
