@@ -14,16 +14,27 @@ export default function PageHeader(props: {
 }): JSX.Element {
   return (
     <div data-cy="page-header">
-      <Link to="/" title="Return home">
-        <img alt="An okapi" src={Okapi} width={60} />
-      </Link>
-      <h1>{props.title}</h1>
-      <LogIn
-        allUsers={props.allUsers}
-        user={props.user}
-        setUser={props.setUser}
-        setStudyList={props.setStudyList}
-      />
+      <br />
+      <div className="d-flex align-items-center justify-content-between">
+        <div className="col-md-2">
+          <Link to="/" title="Return home">
+            <img alt="An okapi" src={Okapi} width={60} />
+          </Link>
+        </div>
+        <div className="col-md-6">
+          <h1>{props.title}</h1>
+        </div>
+        <div className="col-md-4">
+          <LogIn
+            allUsers={props.allUsers}
+            user={props.user}
+            setUser={props.setUser}
+            setStudyList={props.setStudyList}
+          />
+        </div>
+      </div>
+      <br />
+      <br />
     </div>
   );
 }

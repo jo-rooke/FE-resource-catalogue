@@ -19,7 +19,7 @@ export default function Home(props: {
   return (
     <>
       <PageHeader
-        title={"Study Catalogue"}
+        title={"Resource Catalogue"}
         allUsers={props.allUsers}
         user={props.user}
         setUser={props.setUser}

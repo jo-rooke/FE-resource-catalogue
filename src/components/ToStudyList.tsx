@@ -24,11 +24,12 @@ export default function ToStudyList(props: {
         <td>{item.author_name}</td>
         <td>
           <Link to={`/resources/${item.id}`}>
-            <button>See more</button>
+            <button className="btn btn-info btn-sm">See more</button>
           </Link>
         </td>
         <td>
           <button
+            className="btn btn-danger btn-sm"
             onClick={() =>
               handleRemoveFromStudyList(
                 props.user.id,
@@ -44,12 +45,12 @@ export default function ToStudyList(props: {
     );
   };
   return (
-    <div data-cy="study-list">
+    <div data-cy="study-list" className="w-100">
       <h2>My To-Study List</h2>
       {props.studyList.length === 0 ? (
         "Nothing in your study list, why not add a resource by clicking +?"
       ) : (
-        <table>
+        <table className="table text-center">
           <thead>
             <tr>
               <th scope="col">Resource name</th>
