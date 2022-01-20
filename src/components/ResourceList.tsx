@@ -70,7 +70,6 @@ export default function ResourceList(props: {
         )}
       </div>
       <div className="grid-container">
-        {/* <div className="row"> */}
         {props.allResources
           .filter((item) => filterOutStudyList(item, props.studyList))
           .filter((item) => filterSearchAndTags(item, tagsSelected, search))
