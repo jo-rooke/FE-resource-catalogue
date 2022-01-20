@@ -41,26 +41,40 @@ export default function IndividualResource(props: {
         <h2>Loading...</h2>
       ) : (
         <div>
-          <h2>{resource[0].resource_name}</h2>
-          <h4>
+          <h2 className="my-3">{resource[0].resource_name}</h2>
+          <h4 className="my-3">
             👍 {resource[0].likes} 👎 {resource[0].dislikes}
           </h4>
-          <p>Author: {resource[0].author_name}</p>
-          <p>Recommended by: {resource[0].name}</p>
-          {resource[0].creation_date !== undefined && (
-            <p>
-              Creation date: {timestampFormatter(resource[0].creation_date)}
-            </p>
-          )}
-          <div>{resource[0].tags.map((tag) => unclickableTags(tag))}</div>
-          <p>Week number: {resource[0].week_no}</p>
-          <p>Content type: {resource[0].content_type}</p>
-          <p>
+          <h4 className="my-3">
             <a href={resource[0].url} target="_blank" rel="noreferrer">
               Link to resource
             </a>
-          </p>
-          <p>Description: {resource[0].description}</p>
+          </h4>
+          <div className="row">
+            <p className="col-sm-2">Author:</p>
+            <p className="col-sm-10">{resource[0].author_name}</p>
+            <p className="col-sm-2">Recommended by:</p>
+            <p className="col-sm-10">{resource[0].name}</p>
+            {resource[0].creation_date !== undefined && (
+              <>
+                <p className="col-sm-2">Creation date:</p>
+                <p className="col-sm-10">
+                  {timestampFormatter(resource[0].creation_date)}
+                </p>
+              </>
+            )}
+            <p className="col-sm-2">Tags:</p>
+            <p className="col-sm-10">
+              {resource[0].tags.map((tag) => unclickableTags(tag))}
+            </p>
+            <p className="col-sm-2">Week number:</p>
+            <p className="col-sm-10">{resource[0].week_no}</p>
+            <p className="col-sm-2">Content type:</p>
+            <p className="col-sm-10">{resource[0].content_type}</p>
+
+            <p className="col-sm-2">Description:</p>
+            <p className="col-sm-10">{resource[0].description}</p>
+          </div>
           <hr />
           <h2> Comments </h2>
           {props.user === undefined ? (
@@ -76,7 +90,7 @@ export default function IndividualResource(props: {
             <p>You have already added a comment.</p>
           )}
           <br />
-          {comments.map((item) => SingleComment(item))}
+          <div>{comments.map((item) => SingleComment(item))}</div>
         </div>
       )}
     </div>
