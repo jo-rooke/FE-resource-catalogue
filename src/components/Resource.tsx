@@ -5,6 +5,7 @@ import { IResourceShort } from "../interfaces/IResource";
 import { IUser } from "../interfaces/IUser";
 import { unclickableTags } from "../utils/unclickableTags";
 import { Link } from "react-router-dom";
+import "../style.css";
 
 export default function Resource(props: {
   resource: IResourceShort;
@@ -31,10 +32,7 @@ export default function Resource(props: {
   }
 
   return (
-    <div
-      data-cy="resource-item"
-      className="p-2 col-3 border border-dark border-1 m-1 rounded"
-    >
+    <div data-cy="resource-item" className="grid-item">
       <Link to={`/resources/${props.resource.id}`}>
         <h3 data-cy="resource-header">{props.resource.resource_name}</h3>
       </Link>

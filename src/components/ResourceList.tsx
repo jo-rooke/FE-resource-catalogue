@@ -70,22 +70,20 @@ export default function ResourceList(props: {
         )}
       </div>
       <div className="grid-container">
-        {/* <div className="text-center my-2 d-flex justify-content-center"> */}
-        <div className="row">
-          {props.allResources
-            .filter((item) => filterOutStudyList(item, props.studyList))
-            .filter((item) => filterSearchAndTags(item, tagsSelected, search))
-            .map((resource) => (
-              <Resource
-                key={resource.id}
-                resource={resource}
-                user={props.user}
-                setAllResources={props.setAllResources}
-                studyList={props.studyList}
-                setStudyList={props.setStudyList}
-              />
-            ))}
-        </div>
+        {props.allResources
+          .filter((item) => filterOutStudyList(item, props.studyList))
+          .filter((item) => filterSearchAndTags(item, tagsSelected, search))
+          .map((resource) => (
+            <Resource
+              key={resource.id}
+              resource={resource}
+              user={props.user}
+              setAllResources={props.setAllResources}
+              studyList={props.studyList}
+              setStudyList={props.setStudyList}
+            />
+          ))}
+        {/* </div> */}
       </div>
     </div>
   );
