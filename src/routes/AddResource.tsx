@@ -80,10 +80,8 @@ export default function AddResource(props: {
       window.alert("resource with this url has already been submitted");
     }
   }
-  console.log(props.user);
   return (
     <div data-cy="add-a-resource">
-      {console.log(props.user)}
       <PageHeader
         title={"Add a Resource"}
         allUsers={props.allUsers}
@@ -92,7 +90,7 @@ export default function AddResource(props: {
         setStudyList={props.setStudyList}
       />
       {props.user === undefined ? (
-        <p>Please log in to add a resource.</p>
+        <p className="text-center">Please log in to add a resource.</p>
       ) : (
         <div className="d-flex justify-content-center mx-5">
           <form className="col-8">
