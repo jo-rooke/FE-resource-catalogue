@@ -78,13 +78,16 @@ function App(): JSX.Element {
                   allResources={allResources}
                 />
               ) : (
-                <PageHeader
-                  title={"Add a Resource"}
-                  allUsers={allUsers}
-                  user={user}
-                  setUser={setUser}
-                  setStudyList={setStudyList}
-                />
+                <>
+                  <PageHeader
+                    title={"Add a Resource"}
+                    allUsers={allUsers}
+                    user={user}
+                    setUser={setUser}
+                    setStudyList={setStudyList}
+                  />
+                  <h2>Please log in to add a resource.</h2>
+                </>
               )
             }
           />
