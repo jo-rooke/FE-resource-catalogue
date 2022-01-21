@@ -30,7 +30,7 @@ function App(): JSX.Element {
     }
   }, [allUsers]);
   return (
-    <div className="p-3">
+    <div>
       <Router>
         <Routes>
           <Route
