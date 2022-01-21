@@ -30,7 +30,7 @@ function App(): JSX.Element {
     }
   }, [allUsers]);
   return (
-    <div className="p-3">
+    <div>
       <Router>
         <Routes>
           <Route
@@ -78,13 +78,16 @@ function App(): JSX.Element {
                   allResources={allResources}
                 />
               ) : (
-                <PageHeader
-                  title={"Add a Resource"}
-                  allUsers={allUsers}
-                  user={user}
-                  setUser={setUser}
-                  setStudyList={setStudyList}
-                />
+                <>
+                  <PageHeader
+                    title={"Add a Resource"}
+                    allUsers={allUsers}
+                    user={user}
+                    setUser={setUser}
+                    setStudyList={setStudyList}
+                  />
+                  <h2>Please log in to add a resource.</h2>
+                </>
               )
             }
           />
