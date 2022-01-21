@@ -31,15 +31,15 @@ describe("Add a resource", () => {
     cy.get("[data-cy='username']").should(
       "have.attr",
       "placeholder",
-      `user name: ${user}`
+      `${user}`
     );
     cy.get("[data-cy='week-no']").find("option").should("have.length", 10);
-    cy.get("select[name='rec_status']").find("option").should("have.length", 4);
+    cy.get("select[name='rec_status']").find("option").should("have.length", 3);
     cy.get(`textarea[name='description']`)
-      .should("have.attr", "placeholder", "description")
+      .should("have.attr", "placeholder", "e.g. Interactive JavaScript tutorials to learn about callbacks")
       .should("have.value", "");
     cy.get(`textarea[name='rec_message']`)
-      .should("have.attr", "placeholder", "What did you think of the resource?")
+      .should("have.attr", "placeholder", "Let others know what you think about this resource...")
       .should("have.value", "");
     cy.get("[data-cy='tags']")
       .find("button")
