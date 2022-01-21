@@ -40,7 +40,7 @@ export default function IndividualResource(props: {
       {resource.length === 0 ? (
         <h2>Loading...</h2>
       ) : (
-        <div>
+        <div className="p-3">
           <h2 className="my-3">{resource[0].resource_name}</h2>
           <h4 className="my-3">
             👍 {resource[0].likes} 👎 {resource[0].dislikes}

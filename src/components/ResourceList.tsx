@@ -7,6 +7,7 @@ import filterOutStudyList from "../utils/filterOutStudyList";
 import { IUser } from "../interfaces/IUser";
 import { Link } from "react-router-dom";
 import "../style.css";
+import Okapi from "../img/okapi.jpg";
 
 export default function ResourceList(props: {
   tags: ITag[];
@@ -32,8 +33,8 @@ export default function ResourceList(props: {
     setTagsSelected(newTags);
   };
   return (
-    <div data-cy="resource-list">
-      <h2 className="my-2">Resources</h2>
+    <div data-cy="resource-list" className="p-3">
+      <h2 className="mb-2">Resources</h2>
 
       <div data-cy="filtering-tags">
         <input
@@ -85,6 +86,9 @@ export default function ResourceList(props: {
           ))}
         {/* </div> */}
       </div>
+      <Link to="/" title="Return home" className="text-center">
+        <img alt="An okapi" src={Okapi} width={60} />
+      </Link>
     </div>
   );
 }
