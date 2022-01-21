@@ -86,7 +86,7 @@ function App(): JSX.Element {
                     setUser={setUser}
                     setStudyList={setStudyList}
                   />
-                  <h2>Please log in to add a resource.</h2>
+                  <h2 className="p-3">Please log in to add a resource.</h2>
                 </>
               )
             }
